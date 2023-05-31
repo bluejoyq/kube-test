@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+    pc-deployment 
+  labels:
+      app: pc-deployment-example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pc-deployment-example
+  template:
+    metadata:
+      labels:
+        app: pc-deployment-example
+    spec:
+      containers:
+      - name: producer
+        image: producer-image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
