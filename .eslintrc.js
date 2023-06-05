@@ -21,5 +21,10 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
   },
-
+  overrides : [
+    {
+      extends:[ "next/core-web-vitals"],
+      files: ["consumer/**/*.ts?(x)", "consumer/**/*.js?(x)"],
+    }
+  ]
 };

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: producer
-        image: producer-image
+        image: docker.io/library/producer-image:0.0.2
         imagePullPolicy: Never
         ports:
         - containerPort: 3000

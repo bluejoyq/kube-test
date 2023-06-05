@@ -8,6 +8,7 @@ export class AppService {
 
     try {
       await this.delay(5000); // 5초 대기
+      console.log('repsone from Nest.js');
       return 'Sequential response from Nest.js!';
     } finally {
       release(); // 락 해제
