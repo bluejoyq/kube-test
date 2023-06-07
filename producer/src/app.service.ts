@@ -8,8 +8,8 @@ export class AppService {
 
     try {
       await this.delay(5000); // 5초 대기
-      console.log('repsone from Nest.js');
-      return 'Sequential response from Nest.js!';
+      console.log('repsone from Nest.js' + process.env.POD_NAME);
+      return 'Sequential response from Nest.js!' + process.env.POD_NAME;
     } finally {
       release(); // 락 해제
     }
@@ -18,3 +18,4 @@ export class AppService {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
+console.log(process.env);

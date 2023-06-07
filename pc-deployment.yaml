@@ -2,18 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: 
-    pc-deployment 
+    pc-deployment-backend
   labels:
-      app: pc-deployment-example
+      app: pc-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: pc-deployment-example
+      app: pc-deployment
+      tier: backend
   template:
     metadata:
       labels:
-        app: pc-deployment-example
+        app: pc-deployment
+        tier: backend
     spec:
       containers:
       - name: producer
@@ -21,3 +23,29 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+    pc-deployment-front
+  labels:
+      app: pc-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pc-deployment
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: pc-deployment
+        tier: frontend
+    spec:
+      containers:
+      - name: consumer
+        image: docker.io/library/consumer-image:0.0.1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000

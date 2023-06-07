@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 
+    pc-deployment-backend
+  labels:
+      app: pc-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pc-deployment
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: pc-deployment
+        tier: backend
+        version: 0.0.2
+    spec:
+      containers:
+      - name: producer
+        image: docker.io/library/producer-image:0.0.2
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
