@@ -4,10 +4,10 @@ FROM node:18 AS builder
 # 2
 WORKDIR /app
 # 3
-COPY . .
-# 4
+
+COPY package*.json ./
 RUN npm install
-# 5
+COPY . .
 RUN npm run build
 
 EXPOSE 8000

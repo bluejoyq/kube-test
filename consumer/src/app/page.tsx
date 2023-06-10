@@ -1,14 +1,20 @@
-'use client';
-import { useEffect } from 'react';
-
-export default function Home() {
-  const hello = async () => {
-    const res = await fetch(encodeURI('http://pc-service'));
-    const body = await res.json();
-    console.log(body);
-  };
-  useEffect(() => {
-    hello();
-  }, []);
-  return <main>Hello World</main>;
+async function getData() {
+  const res = await fetch(
+    `http://${process.env.PC_SERVICE_SERVICE_HOST}:${process.env.PC_SERVICE_SERVICE_PORT}` ||
+      '',
+    {
+      cache: 'no-store',
+    },
+  );
+  const body = await res.text();
+  return body;
+}
+export default async function Home() {
+  const data = await getData();
+  return (
+    <main>
+      Hello World
+      {data}
+    </main>
+  );
 }
